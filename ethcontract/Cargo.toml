@@ -33,7 +33,7 @@ ws-tokio = ["web3/ws-tokio"]
 
 [dependencies]
 aws-config = { version = "0.55", optional = true }
-aws-sdk-kms = { version = "0.28", optional = true }
+aws-sdk-kms = { version = "0.30", optional = true }
 arrayvec = "0.7"
 ethcontract-common = { version = "0.25.8", path = "../ethcontract-common" }
 ethcontract-derive = { version = "0.25.8", path = "../ethcontract-derive", optional = true, default-features = false }
