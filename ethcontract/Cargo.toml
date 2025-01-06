@@ -32,7 +32,7 @@ ws-tls-tokio = ["web3/ws-tls-tokio"]
 ws-tokio = ["web3/ws-tokio"]
 
 [dependencies]
-aws-config = { version = "0.55", optional = true }
+aws-config = { version = "0.56", optional = true }
 aws-sdk-kms = { version = "0.28", optional = true }
 arrayvec = "0.7"
 ethcontract-common = { version = "0.25.8", path = "../ethcontract-common" }
