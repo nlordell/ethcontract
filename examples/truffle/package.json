@@ -26,6 +26,6 @@
     "@openzeppelin/contracts": "^4.4.2",
     "@truffle/hdwallet-provider": "^2.0.0",
     "truffle": "^5.4.29",
-    "truffle-plugin-verify": "^0.5.20"
+    "truffle-plugin-verify": "^0.6.5"
   }
 }
