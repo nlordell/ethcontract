@@ -31,6 +31,10 @@ pub enum BytecodeError {
     #[error("invalid bytecode length")]
     InvalidLength,
 
+    /// Bytecode string is a map, but not accroding to official map format
+    #[error("invalid map for bytecode")]
+    InvalidMapStruct,
+
     /// Placeholder is not long enough at end of bytecode string.
     #[error("placeholder at end of bytecode is too short")]
     PlaceholderTooShort,

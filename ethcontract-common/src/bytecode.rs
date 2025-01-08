@@ -17,12 +17,23 @@ use web3::types::{Address, Bytes};
 pub struct Bytecode(String);
 
 impl Bytecode {
-    /// Reads hex bytecode representation from a string slice.
+    /// Reads hex bytecode representation from a string or map slice.
     pub fn from_hex_str(s: &str) -> Result<Self, BytecodeError> {
         if s.is_empty() {
             // special case where we have an empty string byte code.
             return Ok(Bytecode::default());
         }
+
+        let s = if s.starts_with('{') {
+            #[derive(Deserialize)]
+            struct Map {
+                object: String,
+            }
+            let map: Map = serde_json::from_str(s).map_err(|_| BytecodeError::InvalidMapStruct)?;
+            map.object
+        } else {
+            s.to_string()
+        };
 
         // Verify that the length is even
         if s.len() % 2 != 0 {
@@ -30,7 +41,7 @@ impl Bytecode {
         }
 
         // account for optional 0x prefix
-        let s = s.strip_prefix("0x").unwrap_or(s);
+        let s = s.strip_prefix("0x").unwrap_or(&s);
 
         // verify that each code block is valid hex
         for block in CodeIter(s) {
@@ -199,6 +210,13 @@ mod tests {
     #[test]
     fn unprefixed_hex_bytecode_is_not_empty() {
         assert!(!Bytecode::from_hex_str("feedface").unwrap().is_empty());
+    }
+
+    #[test]
+    fn unprefixed_map_hex_bytecode_is_not_empty() {
+        assert!(!Bytecode::from_hex_str(r#"{"object": "0x60e060"} "#)
+            .unwrap()
+            .is_empty());
     }
 
     #[test]
