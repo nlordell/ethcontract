@@ -12,6 +12,7 @@ description = """
 Runtime library and proc macro for interacting and generating type-safe bindings
 to Ethereum smart contracts.
 """
+readme = "../README.md"
 
 [lib]
 name = "ethcontract"
